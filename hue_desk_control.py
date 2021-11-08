@@ -25,13 +25,15 @@ class Hue_Control:
 
 
 if __name__ == "__main__":
-    import time
+    import sys
 
     config = json.loads(Path('config.json').read_text())
     ip = config['ip']
     group = config['group']
 
     control = Hue_Control(ip)
-    control.turn_on(group)
-    time.sleep(1)
-    control.turn_off(group)
+
+    if 'on' in sys.argv:
+        control.turn_on(group)
+    elif 'off' in sys.argv:
+        control.turn_off(group)
